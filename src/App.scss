@@ -55,7 +55,38 @@ body {
       }
     }
   }
-  .loan-container{
+  .home-container{
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: column;
+    @include breakpoint($screen-md){
+      flex-direction: row;
+    }
+    .data-wrapper{
+      padding-top:20px;
+      background: $blue;
+      margin-top:20px;
+      @include breakpoint($screen-md){
+        flex-grow: 1;
+        width:15%;
+        margin-top:0;
+      }
+      .dataContainer{
+        display: flex;
+        @include set-wrapper(195px);
+        margin:10px auto;
+        padding:10px;
+        justify-content: space-evenly;
+      }
+    }
+    .loan-container{
+      @include breakpoint($screen-md){
+        flex-grow: 1;
+        width:65%;
+      }
+    }
+  }
+  .calculator{
     box-shadow: 15px 20px 70px -10px;
     padding:2.5rem 2rem 2rem;
     @include set-wrapper(19rem);

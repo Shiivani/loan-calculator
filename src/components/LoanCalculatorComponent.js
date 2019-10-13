@@ -14,7 +14,7 @@ class LoanCalculator extends Component {
         {(value) =>{
           const { amount, duration, handleAmountChange, handleDurationChange }= value;
           return(
-            <>
+            <div class="calculator">
             
           <InputRange
             step={100}
@@ -36,7 +36,7 @@ class LoanCalculator extends Component {
             Over {duration} year{duration > 1 && "s"}
           </h4>
           <Details />
-          </>
+          </div>
           )
           
         }}

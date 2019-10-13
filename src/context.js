@@ -13,27 +13,29 @@ class LoanProvider extends Component {
             isLoaded: false,
             loanDetails:{},
             monthlyPayment:{},
-            storeDetails: {}
+            dataList: [],
         }
-    }
-    componentWillMount() {
-        localStorage.getItem('loanDetails')&&this.setState({
-            storeDetails: JSON.parse(localStorage.getItem('loanDetails'))
-        })
     }
     componentDidMount() {
         this.fetchData(this.state.amount,this.state.duration);
     }
-    fetchData(amount,duration){
+    fetchData=(amount,duration)=>{
         fetch(`https://ftl-frontend-test.herokuapp.com/interest?amount=${amount}&numMonths=${duration}`)
         .then(res=>res.json())
         .then(
-            
             (results) => {
                 this.setState({
                     isLoaded: true,
                     loanDetails: results,
                     monthlyPayment:results.monthlyPayment
+                },()=>{
+                    const jsonObj=localStorage.getItem('storeDetails');
+                    const ls =JSON.parse(jsonObj);
+                    const list = (ls != null) ? [...ls,this.state.loanDetails] : [this.state.loanDetails];
+                    localStorage.setItem('storeDetails',JSON.stringify(list));
+                    this.setState({
+                        dataList: list
+                    })
                 });
             },
             (error) => {
@@ -44,12 +46,6 @@ class LoanProvider extends Component {
             }
             
         )
-    }
-
-    componentWillUpdate(nextProps,nextState){
-        localStorage.setItem('storeDetails',JSON.stringify(nextState.loanDetails));
-        
-        console.log(this.state.storeDetails.principal);
     }
 
     handleAmountChange = value => {
@@ -68,9 +64,11 @@ class LoanProvider extends Component {
                 duration: this.state.duration,
                 isLoaded: this.state.isLoaded,
                 loanDetails:this.state.loanDetails,
+                dataList: this.state.dataList,
                 monthlyPayment:this.state.monthlyPayment,
                 handleAmountChange:this.handleAmountChange,
-                handleDurationChange: this.handleDurationChange
+                handleDurationChange: this.handleDurationChange,
+                fetchData: this.fetchData,
                 }}>
                { this.props.children } 
             </LoanContext.Provider>
