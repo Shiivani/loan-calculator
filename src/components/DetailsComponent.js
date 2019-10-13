@@ -10,8 +10,8 @@ export default function Details(props) {
             {(value) =>{
                 return(
                     <>
-                    <p className="interestRate">{value.loanDetails.interestRate}</p>
-                    <p className="repayment">{value.monthlyPayment.amount}</p>
+                    <h6 className="interestRate">Interest Rate:- <span className="blue">{value.loanDetails.interestRate}</span></h6>
+                    <h6 className="repayment">Monthly Payment:- <span className="blue">${value.monthlyPayment.amount}</span></h6>
                     </>
                 )
             }}

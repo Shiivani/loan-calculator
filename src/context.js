@@ -12,10 +12,15 @@ class LoanProvider extends Component {
             duration: 6,
             isLoaded: false,
             loanDetails:{},
-            monthlyPayment:{}
+            monthlyPayment:{},
+            storeDetails: {}
         }
     }
-    
+    componentWillMount() {
+        localStorage.getItem('loanDetails')&&this.setState({
+            storeDetails: JSON.parse(localStorage.getItem('loanDetails'))
+        })
+    }
     componentDidMount() {
         this.fetchData(this.state.amount,this.state.duration);
     }
@@ -39,6 +44,12 @@ class LoanProvider extends Component {
             }
             
         )
+    }
+
+    componentWillUpdate(nextProps,nextState){
+        localStorage.setItem('storeDetails',JSON.stringify(nextState.loanDetails));
+        
+        console.log(this.state.storeDetails.principal);
     }
 
     handleAmountChange = value => {

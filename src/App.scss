@@ -1,22 +1,123 @@
-.App {
-  text-align: center;
+//Color code variables
+$blue: #077dc3;
+$purple: #9575CD;
+$white: #fff;
+$black: #000;
+$grey:#333;
+$light-grey:#eee;
+$light-blue: #f9f9f9;
+$floralwhite: #fffaf0;
+//Font-family variables
+$font-asap: 'Asap', sans-serif;
+$font-bitter: 'Bitter', serif;
+//Viewport variables
+$screen-md: 992px;
+$screen-lg: 1200px;
+$screen-sm: 768px;
+$screen-xs: 320px;
+//Mixins
+@mixin set-wrapper($width-size) {
+  max-width: $width-size;
+  width: 100%;
+  margin: 0 auto;
+  float: none;
 }
 
-.App-logo {
-  height: 40vmin;
+@mixin breakpoint($screen-size){
+  @media (min-width: $screen-size) {
+    @content;
+  }
 }
+body {
+  font: 14px/18px $font-asap;
+  background: $light-blue;
+  color: $grey;
+  height:100%;
+  @include breakpoint($screen-md) {
+    @include set-wrapper(1366px);
+  }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  .jumbotron {
+    padding:22px 30px 12px;
+    margin:0px auto;
+    background: $purple ;
+    color:$floralwhite;
+    @include breakpoint($screen-md){
+      padding:20px 30px;
+    }
+    .row-header{
+      margin:0px auto;
+      h1{
+        font-size:28px;
+        @include breakpoint($screen-md){
+          font-size:40px;
+        }
+      }
+    }
+  }
+  .loan-container{
+    box-shadow: 15px 20px 70px -10px;
+    padding:2.5rem 2rem 2rem;
+    @include set-wrapper(19rem);
+    margin-top:20px;
+    @include breakpoint($screen-md) {
+      @include set-wrapper(20rem);
+      margin-top:30px;
+    }
+    
+     h4{
+       padding: 10px 0;
+       text-align: center;
+     }
+    .input-range__label-container, 
+    .input-range__label--min,
+    .input-range__label--max {
+      display: none;
+    }
+    .details-container{
+      h6{
+        font-weight: 700;
+        .blue{
+          color:$blue;
+        }
+        
+      }
+    }
+  }
+  
+  .footer {
+    flex-shrink:0;
+    background-color:$grey;
+    color: $white;
+    text-align: center;
+    font-size:20px;
+    line-height:40px;
+    width:100%;
+    padding: 20px 0px 20px 0px;
+    .btn{
+      color:$white;
+      font-size:14px;
+      @include breakpoint($screen-md){
+        font-size:16px;
+      }
+    }
+    h2{
+      font-size:20px;
+      @include breakpoint($screen-md){
+        font-size:28px;
+      }
+    }
+ }
+}
+#root {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+}
+.App{
+  flex: 1 0 auto;
 }
 
-.App-link {
-  color: #09d3ac;
+html{
+  height:100%
 }

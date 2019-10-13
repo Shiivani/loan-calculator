@@ -15,7 +15,7 @@ class LoanCalculator extends Component {
           const { amount, duration, handleAmountChange, handleDurationChange }= value;
           return(
             <>
-            <h4>I want to borrow £{amount}</h4>
+            
           <InputRange
             step={100}
             maxValue={5000}
@@ -23,9 +23,8 @@ class LoanCalculator extends Component {
             value={amount}
             onChange={handleAmountChange}
           />
-          <h4>
-            Over {duration} year{duration > 1 && "s"}
-          </h4>
+          <h4>Loan Amount ${amount}</h4>
+          
           <InputRange
             step={1}
             maxValue={24}
@@ -33,6 +32,9 @@ class LoanCalculator extends Component {
             value={duration}
             onChange={handleDurationChange}
           />
+          <h4>
+            Over {duration} year{duration > 1 && "s"}
+          </h4>
           <Details />
           </>
           )
